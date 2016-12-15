@@ -2,7 +2,7 @@ angular.module('itunes').controller('mainCtrl', function($scope, itunesService){
   //This is setting up the default behavior of our ng-grid. The important thing to note is the 'data' property. The value is 'songData'. That means ng-grid is looking for songData on $scope and is putting whatever songData is into the grid.
   //This means when you make your iTunes request, you'll need to get back the information, parse it accordingly, then set it to songData on the scope -> $scope.songData = ...
   $scope.gridOptions = { 
-      data: 'songData',
+      data: "songData",
       height: '110px',
       sortInfo: {fields: ['Song', 'Artist', 'Collection', 'Type'], directions: ['asc']},
       columnDefs: [
@@ -25,7 +25,11 @@ angular.module('itunes').controller('mainCtrl', function($scope, itunesService){
   //Also note that that method should be retuning a promise, so you could use .then in this function. 
     
     //Code here
-  
+  $scope.getSongData = function(){
+    itunesService.getArtist($scope.artist).then(function(dataFromService){
+        $scope.songData = dataFromService;
+    });
+    }
 
 
 
